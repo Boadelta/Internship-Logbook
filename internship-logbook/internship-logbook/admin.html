@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Admin Dashboard | Internship Logbook</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+
+  <body>
+    <div class="admin-layout">
+      <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">IL</div>
+
+          <div>
+            <h2>Internship</h2>
+            <span>Logbook</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-link active" data-section="dashboard">
+            <span class="nav-icon">▣</span>
+            <span>Dashboard</span>
+          </a>
+
+          <a href="#" class="nav-link" data-section="students">
+            <span class="nav-icon">♙</span>
+            <span>Students</span>
+          </a>
+
+          <a href="#" class="nav-link" data-section="supervisors">
+            <span class="nav-icon">♙</span>
+            <span>Supervisors</span>
+          </a>
+
+          <a href="#" class="nav-link" data-section="internships">
+            <span class="nav-icon">▤</span>
+            <span>Internships</span>
+          </a>
+
+          <a href="#" class="nav-link" data-section="logs">
+            <span class="nav-icon">▤</span>
+            <span>Log Reviews</span>
+          </a>
+
+          <a href="#" class="nav-link" data-section="profile">
+            <span class="nav-icon">◯</span>
+            <span>Profile</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <a href="#" class="nav-link logout-link" id="logoutButton">
+            <span class="nav-icon">↪</span>
+            <span>Logout</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+      <main class="main-content">
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+          <div class="page-title">
+            <h1 id="pageTitle">Dashboard</h1>
+
+            <p id="pageSubtitle">Overview of your internship programme.</p>
+          </div>
+
+          <div class="admin-account">
+            <button
+              type="button"
+              class="notification"
+              id="notificationButton"
+              aria-label="Notifications"
+            >
+              🔔
+            </button>
+
+            <div class="admin-avatar" id="adminAvatar">--</div>
+
+            <div class="admin-info">
+              <strong id="adminDisplayName"> Administrator </strong>
+
+              <span id="adminDisplayRole"> Administrator </span>
+            </div>
+          </div>
+        </header>
+
+        <!-- =====================================================
+           DASHBOARD
+      ====================================================== -->
+
+        <section
+          class="dashboard-content page-section active-section"
+          id="dashboard"
+        >
+          <div class="welcome-section">
+            <h2>Welcome 👋</h2>
+
+            <p>Here's an overview of your internship programme.</p>
+          </div>
+
+          <!-- STATISTICS -->
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon blue">♙</div>
+
+              <div>
+                <span class="stat-label"> Total Students </span>
+
+                <h3 id="totalStudents">0</h3>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon purple">♙</div>
+
+              <div>
+                <span class="stat-label"> Total Supervisors </span>
+
+                <h3 id="totalSupervisors">0</h3>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon green">✓</div>
+
+              <div>
+                <span class="stat-label"> Active Internships </span>
+
+                <h3 id="activeInternships">0</h3>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon yellow">◷</div>
+
+              <div>
+                <span class="stat-label"> Pending Reviews </span>
+
+                <h3 id="pendingReviews">0</h3>
+              </div>
+            </div>
+          </div>
+
+          <!-- RECENT ACTIVITY -->
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Recent Activity</h2>
+
+                <p>Latest activity across the internship programme.</p>
+              </div>
+
+              <button
+                type="button"
+                class="secondary-button"
+                data-section-button="logs"
+              >
+                View Logs
+              </button>
+            </div>
+
+            <div class="activity-container" id="recentActivityContainer">
+              <div class="empty-state" id="recentActivityEmpty">
+                <div class="empty-state-icon">▤</div>
+
+                <h3>No recent activity</h3>
+
+                <p>
+                  Recent student submissions and system activities will appear
+                  here.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- PROGRAMME OVERVIEW -->
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Programme Overview</h2>
+
+                <p>Current internship programme status.</p>
+              </div>
+            </div>
+
+            <div class="overview-grid">
+              <div class="overview-item">
+                <span> Active Students </span>
+
+                <strong id="overviewActiveStudents"> 0 </strong>
+              </div>
+
+              <div class="overview-item">
+                <span> Pending Placements </span>
+
+                <strong id="pendingPlacements"> 0 </strong>
+              </div>
+
+              <div class="overview-item">
+                <span> Completed Internships </span>
+
+                <strong id="completedInternships"> 0 </strong>
+              </div>
+
+              <div class="overview-item">
+                <span> Pending Log Reviews </span>
+
+                <strong id="overviewPendingReviews"> 0 </strong>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- =====================================================
+           STUDENTS
+      ====================================================== -->
+
+        <section class="dashboard-content page-section" id="students">
+          <div class="welcome-section">
+            <h2>Students</h2>
+
+            <p>Manage students registered in the internship programme.</p>
+          </div>
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Student Management</h2>
+
+                <p>View and manage registered students.</p>
+              </div>
+
+              <button
+                type="button"
+                class="primary-button"
+                id="addStudentButton"
+              >
+                + Add Student
+              </button>
+            </div>
+
+            <div class="table-controls">
+              <div class="search-box">
+                <input
+                  type="search"
+                  id="studentSearch"
+                  placeholder="Search by name, matric number or email..."
+                  autocomplete="off"
+                />
+              </div>
+
+              <select id="studentStatusFilter">
+                <option value="">All Statuses</option>
+
+                <option value="active">Active</option>
+
+                <option value="pending">Pending</option>
+
+                <option value="completed">Completed</option>
+
+                <option value="inactive">Inactive</option>
+              </select>
+
+              <select id="studentDepartmentFilter">
+                <option value="">All Departments</option>
+              </select>
+            </div>
+
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Student</th>
+
+                    <th>Matric Number</th>
+
+                    <th>Department</th>
+
+                    <th>Company</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+                  </tr>
+                </thead>
+
+                <tbody id="studentsTableBody">
+                  <tr>
+                    <td colspan="6" class="table-empty">No students found.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <!-- =====================================================
+           SUPERVISORS
+      ====================================================== -->
+
+        <section class="dashboard-content page-section" id="supervisors">
+          <div class="welcome-section">
+            <h2>Supervisors</h2>
+
+            <p>Manage internship supervisors and student assignments.</p>
+          </div>
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Supervisor Management</h2>
+
+                <p>View and manage registered supervisors.</p>
+              </div>
+
+              <button
+                type="button"
+                class="primary-button"
+                id="addSupervisorButton"
+              >
+                + Add Supervisor
+              </button>
+            </div>
+
+            <div class="table-controls">
+              <div class="search-box">
+                <input
+                  type="search"
+                  id="supervisorSearch"
+                  placeholder="Search supervisors by name or email..."
+                  autocomplete="off"
+                />
+              </div>
+
+              <select id="supervisorStatusFilter">
+                <option value="">All Statuses</option>
+
+                <option value="active">Active</option>
+
+                <option value="inactive">Inactive</option>
+              </select>
+
+              <select id="supervisorDepartmentFilter">
+                <option value="">All Departments</option>
+              </select>
+            </div>
+
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Supervisor</th>
+
+                    <th>Email</th>
+
+                    <th>Department</th>
+
+                    <th>Students</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+                  </tr>
+                </thead>
+
+                <tbody id="supervisorsTableBody">
+                  <tr>
+                    <td colspan="6" class="table-empty">
+                      No supervisors found.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <!-- =====================================================
+           INTERNSHIPS
+      ====================================================== -->
+
+        <section class="dashboard-content page-section" id="internships">
+          <div class="welcome-section">
+            <h2>Internships</h2>
+
+            <p>Manage student internship placements.</p>
+          </div>
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Internship Placements</h2>
+
+                <p>View and manage student internship placements.</p>
+              </div>
+
+              <button
+                type="button"
+                class="primary-button"
+                id="addInternshipButton"
+              >
+                + Add Placement
+              </button>
+            </div>
+
+            <div class="table-controls">
+              <div class="search-box">
+                <input
+                  type="search"
+                  id="internshipSearch"
+                  placeholder="Search student, company or supervisor..."
+                  autocomplete="off"
+                />
+              </div>
+
+              <select id="internshipStatusFilter">
+                <option value="">All Statuses</option>
+
+                <option value="active">Active</option>
+
+                <option value="pending">Pending</option>
+
+                <option value="completed">Completed</option>
+
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Student</th>
+
+                    <th>Company</th>
+
+                    <th>Supervisor</th>
+
+                    <th>Start Date</th>
+
+                    <th>End Date</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+                  </tr>
+                </thead>
+
+                <tbody id="internshipsTableBody">
+                  <tr>
+                    <td colspan="7" class="table-empty">
+                      No internship placements found.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <!-- =====================================================
+           LOGS
+      ====================================================== -->
+
+        <section class="dashboard-content page-section" id="logs">
+          <div class="welcome-section">
+            <h2>Log Reviews</h2>
+
+            <p>Monitor internship logs submitted by students.</p>
+          </div>
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Internship Logs</h2>
+
+                <p>Review and monitor student internship activities.</p>
+              </div>
+            </div>
+
+            <div class="table-controls">
+              <div class="search-box">
+                <input
+                  type="search"
+                  id="logSearch"
+                  placeholder="Search student, activity or supervisor..."
+                  autocomplete="off"
+                />
+              </div>
+
+              <select id="logStatusFilter">
+                <option value="">All Statuses</option>
+
+                <option value="pending">Pending</option>
+
+                <option value="approved">Approved</option>
+
+                <option value="rejected">Rejected</option>
+              </select>
+            </div>
+
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Student</th>
+
+                    <th>Date</th>
+
+                    <th>Activity</th>
+
+                    <th>Supervisor</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+                  </tr>
+                </thead>
+
+                <tbody id="logsTableBody">
+                  <tr>
+                    <td colspan="6" class="table-empty">
+                      No internship logs found.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <!-- =====================================================
+           PROFILE
+      ====================================================== -->
+
+        <section class="dashboard-content page-section" id="profile">
+          <div class="welcome-section">
+            <h2>My Profile</h2>
+
+            <p>View and manage your administrator information.</p>
+          </div>
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Administrator Information</h2>
+
+                <p>Your registered administrator information.</p>
+              </div>
+
+              <button
+                type="button"
+                class="secondary-button"
+                id="editAdminButton"
+              >
+                Edit Profile
+              </button>
+            </div>
+
+            <div class="profile-grid">
+              <div class="info-item">
+                <span> Full Name </span>
+
+                <strong id="adminFullName"> Loading... </strong>
+              </div>
+
+              <div class="info-item">
+                <span> Email </span>
+
+                <strong id="adminEmail"> Loading... </strong>
+              </div>
+
+              <div class="info-item">
+                <span> Phone Number </span>
+
+                <strong id="adminPhone"> Loading... </strong>
+              </div>
+
+              <div class="info-item">
+                <span> Role </span>
+
+                <strong id="adminRole"> Loading... </strong>
+              </div>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <!-- =========================================================
+       MODAL CONTAINER
+  ========================================================== -->
+
+    <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+      <div
+        class="modal"
+        id="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <div class="modal-header">
+          <div>
+            <h2 id="modalTitle">Modal</h2>
+
+            <p id="modalSubtitle">Modal information</p>
+          </div>
+
+          <button
+            type="button"
+            class="modal-close"
+            id="modalCloseButton"
+            aria-label="Close modal"
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="modal-body" id="modalBody"></div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+       JAVASCRIPT
+  ========================================================== -->
+
+    <script src="js/admin.js"></script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Internship Logbook | Login</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/login.css')}}" />
+  </head>
+
+  <body>
+    <main class="login-page">
+      <section class="login-container">
+        <div class="login-header">
+          <div class="logo">IL</div>
+
+          <h1>Internship Logbook</h1>
+
+          <p>Sign in to manage your internship activities.</p>
+        </div>
+
+        <form class="login-form" id = "loginForm">
+          <div class="form-group">
+            <label for="email">Email</label>
+
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="Enter your email "
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+
+            <div class="password-wrapper">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+              />
+
+              <button type="button" class="password-toggle" id="passwordToggle">
+                Show
+              </button>
+            </div>
+          </div>
+       <a href="{{url_for('create')}}" style="display: block; text-align: right; margin-bottom:5px;">Activate account</a>
+
+          <button type="submit" class="login-button">Sign In</button>
+        </form>
+
+        <div class="login-footer">
+          <p>Internship Management System</p>
+        </div>
+      </section>
+    </main>
+    <script src="{{url_for('static', filename='js/buttonFeature.js')}}">
+        </script>
+    <script src="{{url_for('static', filename='js/login.js')}}"></script>
+      
+  </body>
+</html>

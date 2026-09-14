@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Student Dashboard | Internship Logbook</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/student.css" />
+  </head>
+
+  <body>
+    <div class="student-layout">
+      <!-- ================================
+           SIDEBAR
+      ================================= -->
+
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">IL</div>
+
+          <div>
+            <h2>Internship</h2>
+            <span>Logbook</span>
+          </div>
+        </div>
+
+        <!-- SIDEBAR NAVIGATION -->
+
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-link active" data-section="dashboard">
+            <span class="nav-icon">▣</span>
+            <span>Dashboard</span>
+          </a>
+
+          <a href="#" class="nav-link" data-section="profile">
+            <span class="nav-icon">◯</span>
+            <span>Profile</span>
+          </a>
+
+          <a href="#" class="nav-link" data-section="internship">
+            <span class="nav-icon">▤</span>
+            <span>Internship</span>
+          </a>
+
+          <a href="#" class="nav-link" data-section="logbook">
+            <span class="nav-icon">▥</span>
+            <span>Logbook</span>
+          </a>
+        </nav>
+
+        <!-- SIDEBAR BOTTOM -->
+
+        <div class="sidebar-bottom">
+          <a href="#" class="nav-link logout-link">
+            <span class="nav-icon">↪</span>
+            <span>Logout</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- ================================
+           MAIN CONTENT
+      ================================= -->
+
+      <main class="main-content">
+        <!-- ================================
+             TOP BAR
+        ================================= -->
+
+        <header class="topbar">
+          <div class="page-title">
+            <h1>Dashboard</h1>
+
+            <p>Overview of your internship activities</p>
+          </div>
+
+          <div class="student-account">
+            <div class="notification">🔔</div>
+
+            <div class="student-avatar" id="studentAvatar">--</div>
+
+            <div class="student-info">
+              <span id="studentTopbarName"> Student </span>
+            </div>
+          </div>
+        </header>
+
+        <!-- ================================
+             DASHBOARD SECTION
+        ================================= -->
+
+        <section
+          class="dashboard-content page-section active-section"
+          id="dashboard"
+        >
+          <!-- WELCOME -->
+
+          <div class="welcome-section">
+            <div>
+              <h2>
+                Good afternoon,
+                <span id="studentFirstName"> Student </span>
+                👋
+              </h2>
+
+              <p>Here's an overview of your internship progress.</p>
+            </div>
+          </div>
+
+          <!-- ================================
+               STAT CARDS
+          ================================= -->
+
+          <div class="stats-grid">
+            <!-- SUBMITTED LOGS -->
+
+            <div class="stat-card">
+              <div class="stat-icon blue">▤</div>
+
+              <div>
+                <span class="stat-label"> Submitted Logs </span>
+
+                <h3 id="submittedLogsCount">0</h3>
+              </div>
+            </div>
+
+            <!-- APPROVED LOGS -->
+
+            <div class="stat-card">
+              <div class="stat-icon green">✓</div>
+
+              <div>
+                <span class="stat-label"> Approved Logs </span>
+
+                <h3 id="approvedLogsCount">0</h3>
+              </div>
+            </div>
+
+            <!-- PENDING REVIEWS -->
+
+            <div class="stat-card">
+              <div class="stat-icon yellow">◷</div>
+
+              <div>
+                <span class="stat-label"> Pending Reviews </span>
+
+                <h3 id="pendingLogsCount">0</h3>
+              </div>
+            </div>
+
+            <!-- INTERNSHIP STATUS -->
+
+            <div class="stat-card">
+              <div class="stat-icon purple">●</div>
+
+              <div>
+                <span class="stat-label"> Internship Status </span>
+
+                <h3 id="internshipStatus">Not Assigned</h3>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================================
+               INTERNSHIP INFORMATION
+          ================================= -->
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Internship Information</h2>
+
+                <p>Your current internship placement details.</p>
+              </div>
+
+              <button
+                class="secondary-button"
+                id="viewInternshipButton"
+                data-section-button="internship"
+              >
+                View Details
+              </button>
+            </div>
+
+            <div class="internship-card">
+              <!-- COMPANY -->
+
+              <div class="info-item">
+                <span> Company </span>
+
+                <strong id="dashboardCompany"> Not assigned </strong>
+              </div>
+
+              <!-- SUPERVISOR -->
+
+              <div class="info-item">
+                <span> Supervisor </span>
+
+                <strong id="dashboardSupervisor"> Not assigned </strong>
+              </div>
+
+              <!-- START DATE -->
+
+              <div class="info-item">
+                <span> Start Date </span>
+
+                <strong id="dashboardStartDate"> Not set </strong>
+              </div>
+
+              <!-- END DATE -->
+
+              <div class="info-item">
+                <span> End Date </span>
+
+                <strong id="dashboardEndDate"> Not set </strong>
+              </div>
+
+              <!-- STATUS -->
+
+              <div class="info-item">
+                <span> Status </span>
+
+                <span class="status-badge" id="dashboardInternshipStatus">
+                  Not assigned
+                </span>
+              </div>
+            </div>
+          </section>
+
+          <!-- ================================
+               RECENT LOGS
+          ================================= -->
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Recent Logs</h2>
+
+                <p>Your latest internship activities.</p>
+              </div>
+
+              <button
+                class="secondary-button"
+                id="viewAllLogsButton"
+                data-section-button="logbook"
+              >
+                View All
+              </button>
+            </div>
+
+            <!-- RECENT LOGS CONTAINER -->
+
+            <div id="recentLogsContainer">
+              <!--
+                Backend-generated recent logs
+                will appear here.
+              -->
+
+              <div class="empty-state" id="recentLogsEmptyState">
+                <div class="empty-state-icon">▤</div>
+
+                <h3>No logs yet</h3>
+
+                <p>
+                  Your recent internship logs will appear here once you submit
+                  them.
+                </p>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- ================================
+             PROFILE SECTION
+        ================================= -->
+
+        <section class="dashboard-content page-section" id="profile">
+          <div class="welcome-section">
+            <h2>My Profile</h2>
+
+            <p>View and manage your personal and academic information.</p>
+          </div>
+
+          <!-- ================================
+               PERSONAL INFORMATION
+          ================================= -->
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Personal Information</h2>
+
+                <p>Your registered personal information.</p>
+              </div>
+
+              <button class="secondary-button" id="editProfileButton">
+                Edit Profile
+              </button>
+            </div>
+
+            <div class="profile-grid">
+              <!-- FULL NAME -->
+
+              <div class="info-item">
+                <span> Full Name </span>
+
+                <strong id="profileFullName"> — </strong>
+              </div>
+
+              <!-- EMAIL -->
+
+              <div class="info-item">
+                <span> Email </span>
+
+                <strong id="profileEmail"> — </strong>
+              </div>
+
+              <!-- PHONE -->
+
+              <div class="info-item">
+                <span> Phone Number </span>
+
+                <strong id="profilePhone"> — </strong>
+              </div>
+
+              <!-- ADDRESS -->
+
+              <div class="info-item">
+                <span> Address </span>
+
+                <strong id="profileAddress"> — </strong>
+              </div>
+            </div>
+          </section>
+
+          <!-- ================================
+               ACADEMIC INFORMATION
+          ================================= -->
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Academic Information</h2>
+
+                <p>Your registered academic information.</p>
+              </div>
+            </div>
+
+            <div class="profile-grid">
+              <!-- MATRIC NUMBER -->
+
+              <div class="info-item">
+                <span> Matric Number </span>
+
+                <strong id="profileMatricNumber"> Not provided </strong>
+              </div>
+
+              <!-- DEPARTMENT -->
+
+              <div class="info-item">
+                <span> Department </span>
+
+                <strong id="profileDepartment"> Not provided </strong>
+              </div>
+
+              <!-- LEVEL -->
+
+              <div class="info-item">
+                <span> Level </span>
+
+                <strong id="profileLevel"> Not provided </strong>
+              </div>
+            </div>
+          </section>
+
+          <!-- ================================
+               EDIT PROFILE FORM
+          ================================= -->
+
+          <section
+            class="dashboard-section profile-edit-section"
+            id="profileEditSection"
+          >
+            <div class="section-header">
+              <div>
+                <h2>Edit Personal Information</h2>
+
+                <p>Update the information you want to change.</p>
+              </div>
+            </div>
+
+            <form id="profileEditForm">
+              <div class="profile-form-grid">
+                <!-- FULL NAME -->
+
+                <div class="form-group">
+                  <label for="profileName"> Full Name </label>
+
+                  <input
+                    type="text"
+                    id="profileName"
+                    name="profileName"
+                    placeholder="Enter your full name"
+                    required
+                  />
+                </div>
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+                  <label for="profileEmailInput"> Email Address </label>
+
+                  <input
+                    type="email"
+                    id="profileEmailInput"
+                    name="profileEmail"
+                    placeholder="Enter your email address"
+                    required
+                  />
+                </div>
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+                  <label for="profilePhoneInput"> Phone Number </label>
+
+                  <input
+                    type="tel"
+                    id="profilePhoneInput"
+                    name="profilePhone"
+                    placeholder="Enter your phone number"
+                  />
+                </div>
+
+                <!-- ADDRESS -->
+
+                <div class="form-group">
+                  <label for="profileAddressInput"> Address </label>
+
+                  <input
+                    type="text"
+                    id="profileAddressInput"
+                    name="profileAddress"
+                    placeholder="Enter your address"
+                  />
+                </div>
+              </div>
+
+              <!-- FORM ACTIONS -->
+
+              <div class="profile-form-actions">
+                <button
+                  type="button"
+                  class="secondary-button"
+                  id="cancelProfileEdit"
+                >
+                  Cancel
+                </button>
+
+                <button type="submit" class="primary-button">
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </section>
+        </section>
+
+        <!-- ================================
+             INTERNSHIP SECTION
+        ================================= -->
+
+        <section class="dashboard-content page-section" id="internship">
+          <div class="welcome-section">
+            <h2>My Internship</h2>
+
+            <p>View your internship placement information.</p>
+          </div>
+
+          <!-- ================================
+               INTERNSHIP DETAILS
+          ================================= -->
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Internship Details</h2>
+
+                <p>Information about your current internship.</p>
+              </div>
+            </div>
+
+            <div class="internship-card">
+              <!-- COMPANY -->
+
+              <div class="info-item">
+                <span> Company </span>
+
+                <strong id="internshipCompany"> Not provided </strong>
+              </div>
+
+              <!-- COMPANY ADDRESS -->
+
+              <div class="info-item">
+                <span> Company Address </span>
+
+                <strong id="internshipCompanyAddress"> Not provided </strong>
+              </div>
+
+              <!-- SUPERVISOR -->
+
+              <div class="info-item">
+                <span> Supervisor </span>
+
+                <strong id="internshipSupervisor"> Not assigned </strong>
+              </div>
+
+              <!-- START DATE -->
+
+              <div class="info-item">
+                <span> Start Date </span>
+
+                <strong id="internshipStartDate"> Not provided </strong>
+              </div>
+
+              <!-- END DATE -->
+
+              <div class="info-item">
+                <span> End Date </span>
+
+                <strong id="internshipEndDate"> Not provided </strong>
+              </div>
+
+              <!-- STATUS -->
+
+              <div class="info-item">
+                <span> Status </span>
+
+                <span class="status-badge" id="internshipStatus">
+                  Not provided
+                </span>
+              </div>
+            </div>
+          </section>
+
+          <!-- ================================
+               SUPERVISOR
+          ================================= -->
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Supervisor</h2>
+
+                <p>Your assigned internship supervisor.</p>
+              </div>
+            </div>
+
+            <div class="supervisor-card">
+              <div class="student-avatar" id="supervisorInitials">--</div>
+
+              <div>
+                <strong id="supervisorName"> Not assigned </strong>
+
+                <span> Internship Supervisor </span>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- ================================
+             LOGBOOK SECTION
+        ================================= -->
+
+        <section class="dashboard-content page-section" id="logbook">
+          <div class="welcome-section">
+            <h2>My Logbook</h2>
+
+            <p>Record and track your daily internship activities.</p>
+          </div>
+
+          <!-- ================================
+               DAILY LOGS
+          ================================= -->
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Daily Logs</h2>
+
+                <p>Submit and track your daily internship activities.</p>
+              </div>
+
+              <button class="primary-button" id="addLogButton">
+                + Add Daily Log
+              </button>
+            </div>
+
+            <!-- DAILY LOGS CONTAINER -->
+
+            <div class="table-container" id="dailyLogsContainer">
+              <!--
+                Backend-generated log entries
+                will appear here.
+
+                The empty state will be replaced
+                when logs are available.
+              -->
+
+              <div class="empty-state" id="dailyLogsEmptyState">
+                <div class="empty-state-icon">▤</div>
+
+                <h3 class="state-notify">No daily logs yet</h3>
+
+                <p class="state-notify">
+                  You haven't submitted any internship activities. Click "Add
+                  Daily Log" to create your first entry.
+                </p>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- ================================
+             ADD DAILY LOG MODAL
+        ================================= -->
+
+        <div class="modal-overlay" id="logModal">
+          <div class="log-modal">
+            <!-- MODAL HEADER -->
+
+            <div class="modal-header">
+              <div>
+                <h2>Add Daily Log</h2>
+
+                <p>Record your internship activities.</p>
+              </div>
+
+              <button
+                type="button"
+                class="modal-close"
+                id="closeLogModal"
+                aria-label="Close"
+              >
+                ×
+              </button>
+            </div>
+
+            <!-- ================================
+                 DAILY LOG FORM
+            ================================= -->
+
+            <form id="dailyLogForm">
+              <!-- DATE -->
+
+              <div class="form-group">
+                <label for="logDate"> Date </label>
+
+                <input type="date" id="logDate" name="logDate" required />
+              </div>
+
+              <!-- ACTIVITY -->
+
+              <div class="form-group">
+                <label for="activity"> Activity Description </label>
+
+                <textarea
+                  id="activity"
+                  name="activity"
+                  rows="4"
+                  placeholder="Describe the activities you carried out..."
+                  required
+                ></textarea>
+              </div>
+
+              <!-- SKILLS -->
+
+              <div class="form-group">
+                <label for="skills"> Skills Learned </label>
+
+                <textarea
+                  id="skills"
+                  name="skills"
+                  rows="3"
+                  placeholder="What skills or knowledge did you gain?"
+                  required
+                ></textarea>
+              </div>
+
+              <!-- CHALLENGES -->
+
+              <div class="form-group">
+                <label for="challenges"> Challenges </label>
+
+                <textarea
+                  id="challenges"
+                  name="challenges"
+                  rows="3"
+                  placeholder="Did you encounter any challenges?"
+                ></textarea>
+              </div>
+
+              <!-- FORM ACTIONS -->
+
+              <div class="modal-actions">
+                <button
+                  type="button"
+                  class="secondary-button"
+                  id="cancelLogModal"
+                >
+                  Cancel
+                </button>
+
+                <button type="submit" class="primary-button">Submit Log</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- ================================
+         JAVASCRIPT
+    ================================= -->
+
+    <script src="js/student.js"></script>
+  </body>
+</html>

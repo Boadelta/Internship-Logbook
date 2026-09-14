@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Supervisor Dashboard | Internship Logbook</title>
+
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/style.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/supervisor.css')}}" />
+  </head>
+
+  <body>
+    <div class="supervisor-layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">IL</div>
+
+          <div>
+            <h2>Internship</h2>
+            <span>Logbook</span>
+          </div>
+        </div>
+
+        <!-- NAVIGATION -->
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-link active" data-section="dashboard">
+            <span class="nav-icon">▣</span>
+            <span>Dashboard</span>
+          </a>
+
+          <a href="#" class="nav-link" data-section="students">
+            <span class="nav-icon">♙</span>
+            <span>Students</span>
+          </a>
+
+          <a href="#" class="nav-link" data-section="reviews">
+            <span class="nav-icon">▤</span>
+            <span>Review Logs</span>
+          </a>
+
+          <a href="#" class="nav-link" data-section="profile">
+            <span class="nav-icon">◯</span>
+            <span>Profile</span>
+          </a>
+        </nav>
+
+        <!-- SIDEBAR BOTTOM -->
+        <div class="sidebar-bottom">
+          <a href= "{{url_for('logout')}}" class="nav-link logout-link">
+            <span class="nav-icon">↪</span>
+
+            <span>Logout</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <!-- TOP BAR -->
+        <header class="topbar">
+          <div class="page-title">
+            <h1>Dashboard</h1>
+
+            <p>Overview of your internship supervision activities</p>
+          </div>
+
+          <div class="supervisor-account">
+            <div class="notification">🔔</div>
+
+            <div class="student-avatar">JD</div>
+
+            <div class="student-info">
+              <strong>Supervisor</strong>
+
+              <span>Internship Supervisor</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- ================================
+             DASHBOARD SECTION
+        ================================= -->
+
+        <section
+          class="dashboard-content page-section active-section"
+          id="dashboard"
+        >
+          <!-- WELCOME -->
+          <div class="welcome-section">
+            <h2>Hello {{supervisor.first_name}}👋</h2>
+
+            <p>Here's an overview of your internship supervision activities.</p>
+          </div>
+
+          <!-- STATISTICS -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon blue">♙</div>
+              <div>
+                <span class="stat-label">Assigned Students</span>
+                <h3>{{ students | length }}</h3>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon yellow">◷</div>
+              <div>
+                <span class="stat-label">Pending Reviews</span>
+                <h3>{{ pending_logs_by_student.values() | map('length') | sum }}</h3>
+              </div>
+            </div>
+
+            <div class="stat-card">
+  <div class="stat-icon green">✓</div>
+
+  <div>
+    <span class="stat-label"> Approved Logs </span>
+
+    <h3>{{ approved_logs_count }}</h3>
+  </div>
+</div>
+
+<div class="stat-card">
+  <div class="stat-icon purple">●</div>
+
+  <div>
+    <span class="stat-label"> Active Students </span>
+
+    <h3>{{ active_students_count }}</h3>
+  </div>
+</div>
+</div>
+          <!-- STUDENT OVERVIEW -->
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>My Students</h2>
+
+                <p>Students currently assigned to you.</p>
+              </div>
+            </div>
+
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Matric Number</th>
+                    <th>Company</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboardStudentsTableBody">
+                  {% for student in students %}
+                  <tr>
+                    <td>{{ student.first_name }}</td>
+                    <td>{{ student.student_id }}</td>
+                    <td>{{ student.company }}</td>
+                    <td><span>{{ student.status }}</span></td>
+                  </tr>
+                  {% else %}
+                  <tr>
+                    <td colspan="4" class="table-empty">No students assigned to you yet.</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- PENDING REVIEWS -->
+          <section class="dashboard-section">
+          </section>
+        </section>
+
+        <!-- ================================
+             STUDENTS SECTION
+        ================================= -->
+
+        <section class="dashboard-content page-section" id="students">
+          <div class="welcome-section">
+            <h2>My Students</h2>
+
+            <p>View and manage students assigned to you.</p>
+          </div>
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Assigned Students</h2>
+
+                <p>Students under your supervision.</p>
+              </div>
+            </div>
+
+           
+
+            <!-- STUDENTS TABLE -->
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Student</th>
+
+                    <th>Matric Number</th>
+
+                    <th>Company</th>
+
+                    <th>Status</th>
+
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody id="studentsTableBody">
+                  {% for student in students %}
+                  <tr>
+                    <td>{{ student.first_name }}</td>
+                    <td>{{ student.student_id }}</td>
+                    <td>{{ student.company }}</td>
+                    <td><span>{{ student.status }}</span></td>
+                    <td>
+                      <a href="#" class="secondary-button">
+                      </a>
+                    </td>
+                  </tr>
+                  {% else %}
+                  <tr>
+                    <td colspan="5" class="table-empty">
+                      No students assigned to you yet.
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <!-- ================================
+             REVIEW LOGS SECTION
+        ================================= -->
+
+        <section class="dashboard-content page-section" id="reviews">
+          <div class="welcome-section">
+            <h2>Review Logs</h2>
+
+            <p>Review internship activities submitted by your students.</p>
+          </div>
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Pending Log Reviews</h2>
+                <p>Logs waiting for your approval.</p>
+              </div>
+            </div>
+
+            {% set total_pending = pending_logs_by_student.values() | map('length') | sum %}
+            {% if total_pending > 0 %}
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Date</th>
+                    <th>Activity</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for student in students %}
+                    {% for log in pending_logs_by_student.get(student.student_id, []) %}
+                    <tr>
+                      <td>{{ student.first_name }}</td>
+                      <td>{{ log.log_date }}</td>
+                      <td>{{ log.activity_description }}</td>
+                      <td><span>Pending</span></td>
+                      <td>
+                       <form class="log-action-form" data-action-url="{{ url_for('approve_log', log_id=log.log_id) }}" style="display:inline">
+  <button type="submit" class="primary-button">Approve</button>
+</form>
+<form class="log-action-form" data-action-url="{{ url_for('reject_log', log_id=log.log_id) }}" style="display:inline">
+  <button type="submit" class="secondary-button">Reject</button>
+</form>
+
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            {% else %}
+            <div class="empty-state">
+              <div class="empty-state-icon">✓</div>
+              <h3>No logs to review</h3>
+              <p>Student submissions requiring your attention will appear here.</p>
+            </div>
+            {% endif %}
+          </section>
+        </section>
+
+        <!-- ================================
+             PROFILE SECTION
+        ================================= -->
+
+        <section class="dashboard-content page-section" id="profile">
+          <div class="welcome-section">
+            <h2>My Profile</h2>
+
+            <p>View and manage your supervisor information.</p>
+          </div>
+
+          <section class="dashboard-section">
+            <div class="section-header">
+              <div>
+                <h2>Supervisor Information</h2>
+
+                <p>Your registered supervisor information.</p>
+              </div>
+
+              <button class="secondary-button" id="editSupervisorButton" disabled>
+                 Profile
+              </button>
+            </div>
+
+            <div class="profile-grid">
+              <div class="info-item">
+                <span> Full Name </span>
+
+                <strong> {{supervisor.first_name}} {{supervisor.last_name}} </strong>
+              </div>
+
+              <div class="info-item">
+                <span> Email </span>
+
+                <strong> {{supervisor.email}} </strong>
+              </div>
+
+              
+              <div class="info-item">
+                <span> Department </span>
+
+                <strong> {{supervisor.department}} </strong>
+              </div>
+            </div>
+          </section>
+
+          <!-- EDIT PROFILE -->
+          <section
+            class="dashboard-section profile-edit-section"
+            id="supervisorEditSection"
+          >
+            <div class="section-header">
+              <div>
+                <h2>Edit Profile</h2>
+
+                <p>Update your supervisor information.</p>
+              </div>
+            </div>
+
+            <form id="supervisorEditForm">
+              <div class="profile-form-grid">
+                <div class="form-group">
+                  <label for="supervisorName"> Full Name </label>
+
+                  <input
+                    type="text"
+                    id="supervisorName"
+                    value="Supervisor"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="supervisorEmail"> Email Address </label>
+
+                  <input
+                    type="email"
+                    id="supervisorEmail"
+                    placeholder="Enter your email"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="supervisorPhone"> Phone Number </label>
+
+                  <input
+                    type="tel"
+                    id="supervisorPhone"
+                    placeholder="Enter your phone number"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="supervisorDepartment"> Department </label>
+
+                  <input
+                    type="text"
+                    id="supervisorDepartment"
+                    placeholder="Enter your department"
+                  />
+                </div>
+              </div>
+
+              <div class="profile-form-actions">
+                <button
+                  type="button"
+                  class="secondary-button"
+                  id="cancelSupervisorEdit"
+                >
+                  Cancel
+                </button>
+
+                <button type="submit" class="primary-button">
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </section>
+        </section>
+      </main>
+    </div>
+   <script src="{{url_for('static', filename='js/buttonFeature.js')}}">
+        </script>
+    
+    <script src="{{url_for('static', filename= 'js/supervisor.js')}}"></script>
+      
+<script>
+function getCsrfToken() {
+  const match = document.cookie.match(/csrf_access_token=([^;]+)/);
+  return match ? match[1] : null;
+}
+
+document.addEventListener("submit", async function (e) {
+  const form = e.target;
+  if (!form.classList.contains("log-action-form")) return;
+
+  e.preventDefault();
+
+  const url = form.dataset.actionUrl;
+
+  try {
+    const res = await fetch(url, {
+      method: "PATCH",
+      credentials: "include",
+      headers: { "X-CSRF-TOKEN": getCsrfToken() }
+    });
+
+    if (res.ok) {
+      window.location.reload();
+    } else {
+      alert("Action failed.");
+    }
+  } catch (err) {
+    alert("Something went wrong.");
+  }
+});
+</script>
+  </body>
+    
+</html>

@@ -1,0 +1,887 @@
+/* ================================
+   SUPERVISOR DASHBOARD
+================================ */
+
+.supervisor-layout {
+  min-height: 100vh;
+  display: flex;
+  background-color: #f8fafc;
+}
+
+/* ================================
+   SIDEBAR
+================================ */
+
+.supervisor-layout .sidebar {
+  width: 250px;
+  min-height: 100vh;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  background-color: var(--white);
+
+  border-right: 1px solid var(--border);
+
+  display: flex;
+  flex-direction: column;
+
+  z-index: 100;
+}
+
+/* ================================
+   SIDEBAR HEADER
+================================ */
+
+.supervisor-layout .sidebar-header {
+  height: 80px;
+
+  padding: 0 24px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.supervisor-layout .sidebar-header .logo {
+  width: 40px;
+  height: 40px;
+
+  flex-shrink: 0;
+
+  background-color: var(--primary-blue);
+
+  color: var(--white);
+
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.supervisor-layout .sidebar-header h2 {
+  font-size: 16px;
+
+  line-height: 1.2;
+
+  margin: 0;
+}
+
+.supervisor-layout .sidebar-header span {
+  color: var(--text-gray);
+
+  font-size: 12px;
+}
+
+/* ================================
+   SIDEBAR NAVIGATION
+================================ */
+
+.supervisor-layout .sidebar-nav {
+  padding: 24px 14px;
+}
+
+.supervisor-layout .nav-link {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 11px 14px;
+
+  margin-bottom: 5px;
+
+  border-radius: 8px;
+
+  color: var(--text-gray);
+
+  font-size: 14px;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition: 0.2s ease;
+}
+
+.supervisor-layout .nav-link:hover {
+  background-color: var(--light-blue);
+
+  color: var(--primary-blue);
+}
+
+.supervisor-layout .nav-link.active {
+  background-color: var(--light-blue);
+
+  color: var(--primary-blue);
+
+  font-weight: 600;
+}
+
+.supervisor-layout .nav-icon {
+  width: 20px;
+
+  flex-shrink: 0;
+
+  text-align: center;
+
+  font-size: 15px;
+}
+
+/* ================================
+   SIDEBAR BOTTOM
+================================ */
+
+.supervisor-layout .sidebar-bottom {
+  margin-top: auto;
+
+  padding: 14px;
+
+  border-top: 1px solid var(--border);
+}
+
+.supervisor-layout .logout-link:hover {
+  color: var(--danger);
+
+  background-color: #fef2f2;
+}
+
+/* ================================
+   MAIN CONTENT
+================================ */
+
+.supervisor-layout .main-content {
+  margin-left: 250px;
+
+  width: calc(100% - 250px);
+
+  min-height: 100vh;
+}
+
+/* ================================
+   TOP BAR
+================================ */
+
+.supervisor-layout .topbar {
+  height: 80px;
+
+  padding: 0 35px;
+
+  background-color: var(--white);
+
+  border-bottom: 1px solid var(--border);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.supervisor-layout .page-title h1 {
+  margin: 0 0 4px;
+
+  font-size: 20px;
+
+  line-height: 1.2;
+}
+
+.supervisor-layout .page-title p {
+  margin: 0;
+
+  color: var(--text-gray);
+
+  font-size: 13px;
+}
+
+/* ================================
+   SUPERVISOR ACCOUNT
+================================ */
+
+.supervisor-account {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.supervisor-account .notification {
+  width: 38px;
+  height: 38px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.supervisor-account .notification:hover {
+  border-color: var(--primary-blue);
+
+  background-color: var(--light-blue);
+}
+
+.supervisor-account .student-avatar {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background-color: var(--light-blue);
+
+  color: var(--primary-blue);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.supervisor-account .student-info {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.supervisor-account .student-info strong {
+  font-size: 13px;
+}
+
+.supervisor-account .student-info span {
+  color: var(--text-gray);
+
+  font-size: 11px;
+}
+
+/* ================================
+   DASHBOARD CONTENT
+================================ */
+
+.supervisor-layout .dashboard-content {
+  padding: 35px;
+}
+
+/* ================================
+   PAGE SECTIONS
+================================ */
+
+.supervisor-layout .page-section {
+  display: none;
+}
+
+.supervisor-layout .page-section.active-section {
+  display: block;
+}
+
+/* ================================
+   WELCOME SECTION
+================================ */
+
+.supervisor-layout .welcome-section {
+  margin-bottom: 28px;
+}
+
+.supervisor-layout .welcome-section h2 {
+  margin: 0 0 6px;
+
+  font-size: 22px;
+}
+
+.supervisor-layout .welcome-section p {
+  margin: 0;
+
+  color: var(--text-gray);
+
+  font-size: 14px;
+}
+
+/* ================================
+   STATISTICS
+================================ */
+
+.supervisor-layout .stats-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+
+  margin-bottom: 30px;
+}
+
+.supervisor-layout .stat-card {
+  min-height: 84px;
+
+  padding: 20px;
+
+  background-color: var(--white);
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  transition: 0.2s ease;
+}
+
+.supervisor-layout .stat-card:hover {
+  border-color: #cbd5e1;
+
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+}
+
+.supervisor-layout .stat-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+}
+
+.supervisor-layout .stat-icon.blue {
+  background-color: var(--light-blue);
+
+  color: var(--primary-blue);
+}
+
+.supervisor-layout .stat-icon.green {
+  background-color: #f0fdf4;
+
+  color: var(--success);
+}
+
+.supervisor-layout .stat-icon.yellow {
+  background-color: #fffbeb;
+
+  color: var(--warning);
+}
+
+.supervisor-layout .stat-icon.purple {
+  background-color: #faf5ff;
+
+  color: #9333ea;
+}
+
+.supervisor-layout .stat-label {
+  display: block;
+
+  color: var(--text-gray);
+
+  font-size: 12px;
+
+  margin-bottom: 5px;
+}
+
+.supervisor-layout .stat-card h3 {
+  margin: 0;
+
+  font-size: 20px;
+}
+
+/* ================================
+   DASHBOARD SECTIONS
+================================ */
+
+.supervisor-layout .dashboard-section {
+  background-color: var(--white);
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+  margin-bottom: 24px;
+
+  overflow: hidden;
+}
+
+.supervisor-layout .section-header {
+  padding: 22px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.supervisor-layout .section-header h2 {
+  margin: 0 0 4px;
+
+  font-size: 16px;
+}
+
+.supervisor-layout .section-header p {
+  margin: 0;
+
+  color: var(--text-gray);
+
+  font-size: 12px;
+}
+
+/* ================================
+   BUTTONS
+================================ */
+
+.supervisor-layout .secondary-button {
+  padding: 8px 13px;
+
+  background-color: var(--white);
+
+  border: 1px solid var(--border);
+
+  border-radius: 7px;
+
+  color: var(--text-dark);
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.supervisor-layout .secondary-button:hover {
+  border-color: var(--primary-blue);
+
+  color: var(--primary-blue);
+
+  background-color: var(--light-blue);
+}
+
+.supervisor-layout .primary-button {
+  padding: 9px 14px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background-color: var(--primary-blue);
+
+  color: var(--white);
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.supervisor-layout .primary-button:hover {
+  background-color: var(--dark-blue);
+}
+
+/* ================================
+   EMPTY STATE
+================================ */
+
+.supervisor-layout .empty-state {
+  min-height: 180px;
+
+  padding: 35px 24px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+.supervisor-layout .empty-state-icon {
+  width: 46px;
+  height: 46px;
+
+  margin-bottom: 14px;
+
+  border-radius: 50%;
+
+  background-color: var(--light-blue);
+
+  color: var(--primary-blue);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+}
+
+.supervisor-layout .empty-state h3 {
+  margin: 0 0 6px;
+
+  font-size: 14px;
+}
+
+.supervisor-layout .empty-state p {
+  max-width: 400px;
+
+  margin: 0;
+
+  color: var(--text-gray);
+
+  font-size: 12px;
+
+  line-height: 1.6;
+}
+
+/* ================================
+   STUDENT CONTROLS
+================================ */
+
+.supervisor-layout .student-controls {
+  padding: 20px 24px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  border-bottom: 1px solid var(--border);
+
+  background-color: #ffffff;
+}
+
+.supervisor-layout .search-box {
+  flex: 1;
+}
+
+.supervisor-layout .search-box input,
+.supervisor-layout .student-controls select {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 10px 12px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 7px;
+
+  background-color: var(--white);
+
+  color: var(--text-dark);
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+.supervisor-layout .student-controls select {
+  width: 180px;
+
+  cursor: pointer;
+}
+
+.supervisor-layout .search-box input:focus,
+.supervisor-layout .student-controls select:focus {
+  border-color: var(--primary-blue);
+
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+/* ================================
+   TABLE
+================================ */
+
+.supervisor-layout .table-container {
+  overflow-x: auto;
+}
+
+.supervisor-layout table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+.supervisor-layout th,
+.supervisor-layout td {
+  padding: 15px 24px;
+
+  text-align: left;
+
+  border-bottom: 1px solid var(--border);
+
+  font-size: 13px;
+}
+
+.supervisor-layout th {
+  background-color: #f8fafc;
+
+  color: var(--text-gray);
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+}
+
+.supervisor-layout td {
+  color: var(--text-dark);
+}
+
+.supervisor-layout tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.supervisor-layout tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.supervisor-layout .table-empty {
+  padding: 45px 24px;
+
+  text-align: center;
+
+  color: var(--text-gray);
+}
+
+/* ================================
+   PROFILE
+================================ */
+
+.supervisor-layout .profile-grid {
+  padding: 24px;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 25px;
+}
+
+.supervisor-layout .info-item {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.supervisor-layout .info-item span:first-child {
+  color: var(--text-gray);
+
+  font-size: 12px;
+}
+
+.supervisor-layout .info-item strong {
+  font-size: 14px;
+}
+
+/* ================================
+   PROFILE EDIT
+================================ */
+
+.supervisor-layout .profile-edit-section {
+  display: none;
+}
+
+.supervisor-layout .profile-edit-section.show {
+  display: block;
+}
+
+.supervisor-layout .profile-form-grid {
+  padding: 24px;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 20px;
+}
+
+.supervisor-layout .form-group {
+  margin-bottom: 0;
+}
+
+.supervisor-layout .form-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: var(--text-dark);
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.supervisor-layout .form-group input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 10px 12px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 7px;
+
+  background-color: var(--white);
+
+  color: var(--text-dark);
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+.supervisor-layout .form-group input:focus {
+  border-color: var(--primary-blue);
+
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+.supervisor-layout .profile-form-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  padding: 0 24px 24px;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1100px) {
+  .supervisor-layout .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .supervisor-layout .sidebar {
+    width: 70px;
+  }
+
+  .supervisor-layout .sidebar-header {
+    justify-content: center;
+
+    padding: 0;
+  }
+
+  .supervisor-layout .sidebar-header > div:not(.logo) {
+    display: none;
+  }
+
+  .supervisor-layout .sidebar-nav {
+    padding: 20px 8px;
+  }
+
+  .supervisor-layout .nav-link {
+    justify-content: center;
+
+    padding: 12px;
+  }
+
+  .supervisor-layout .nav-link span:last-child {
+    display: none;
+  }
+
+  .supervisor-layout .sidebar-bottom {
+    padding: 8px;
+  }
+
+  .supervisor-layout .main-content {
+    margin-left: 70px;
+
+    width: calc(100% - 70px);
+  }
+
+  .supervisor-layout .student-info {
+    display: none;
+  }
+
+  .supervisor-layout .dashboard-content {
+    padding: 25px 20px;
+  }
+
+  .supervisor-layout .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .supervisor-layout .student-controls {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .supervisor-layout .student-controls select {
+    width: 100%;
+  }
+
+  .supervisor-layout .profile-grid,
+  .supervisor-layout .profile-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .supervisor-layout .topbar {
+    padding: 0 20px;
+  }
+
+  .supervisor-layout .page-title p {
+    display: none;
+  }
+
+  .supervisor-layout .section-header {
+    align-items: flex-start;
+
+    gap: 15px;
+
+    flex-direction: column;
+  }
+}
