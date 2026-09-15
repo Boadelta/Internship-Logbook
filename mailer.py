@@ -1,69 +1,106 @@
 import os
 import random
-import smtplib
-import threading
-from email.mime.text import MIMEText
+import requests
 
-GMAIL_ADDRESS = os.environ.get("GMAIL_ADDRESS")
-GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD")
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+SENDGRID_FROM_EMAIL = os.environ.get("SENDGRID_FROM_EMAIL")
 
 
 def generate_otp():
     return str(random.randint(100000, 999999))
 
 
-def send_activation_email(to_email, otp_code, wait_seconds=8):
+def send_activation_email(to_email, otp_code):
     """
-    Sends the activation email over Gmail SMTP.
+    Sends the activation email via SendGrid's HTTP API.
 
-    Runs the actual SMTP call in a background thread and waits up to
-    `wait_seconds` for it to finish. This means:
-      - If Gmail responds normally (usually 1-3 seconds), the caller
-        gets a real success/failure result.
-      - If the connection is blocked or unusually slow, we stop waiting
-        after `wait_seconds` instead of risking a full request timeout.
+    Uses HTTPS (port 443) instead of SMTP, avoiding any SMTP-port
+    blocking issues on the hosting platform.
 
     Returns:
-        (success: bool, message: str or None)
+        (success: bool, error_message: str or None)import os
+import random
+import requests
+
+BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
+BREVO_FROM_EMAIL = os.environ.get("BREVO_FROM_EMAIL")
+
+
+def generate_otp():
+    return str(random.randint(100000, 999999))
+
+
+def send_activation_email(to_email, otp_code):
+    """
+    Sends the activation email via Brevo's HTTP API.
+
+    Uses HTTPS (port 443) instead of SMTP, avoiding any SMTP-port
+    blocking issues on the hosting platform.
+
+    Returns:
+        (success: bool, error_message: str or None)
     """
 
-    result = {"success": False, "error": None}
-
-    def _send():
-        try:
-            subject = "Your Internship Logbook Activation Code"
-            body = (
-                f"Your activation code is: {otp_code}\n\n"
-                "Use this code to set your password and activate your account."
-            )
-
-            msg = MIMEText(body)
-            msg["Subject"] = subject
-            msg["From"] = GMAIL_ADDRESS
-            msg["To"] = to_email
-
-            with smtplib.SMTP("smtp.gmail.com", 587, timeout=6) as server:
-                server.starttls()
-                server.login(GMAIL_ADDRESS, GMAIL_APP_PASSWORD)
-                server.sendmail(GMAIL_ADDRESS, to_email, msg.as_string())
-
-            result["success"] = True
-
-        except Exception as e:
-            result["error"] = str(e)
-
-    thread = threading.Thread(target=_send, daemon=True)
-    thread.start()
-    thread.join(timeout=wait_seconds)
-
-    if thread.is_alive():
-        return False, (
-            "Email is taking longer than expected and may still be "
-            "sending in the background. Gmail SMTP may be blocked on "
-            "this host."
+    try:
+        response = requests.post(
+            "https://api.brevo.com/v3/smtp/email",
+            headers={
+                "api-key": BREVO_API_KEY,
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            json={
+                "sender": {"email": BREVO_FROM_EMAIL, "name": "Internship Logbook"},
+                "to": [{"email": to_email}],
+                "subject": "Your Internship Logbook Activation Code",
+                "textContent": (
+                    f"Your activation code is: {otp_code}\n\n"
+                    "Use this code to set your password and activate your account."
+                )
+            },
+            timeout=10
         )
 
-    if result["success"]:
+        if response.status_code >= 400:
+            return False, response.text
+
         return True, None
 
-    return False, result["error"] or "Unknown email error."
+    except Exception as e:
+        return False, str(e)
+    """
+
+    try:
+        response = requests.post(
+            "https://api.sendgrid.com/v3/mail/send",
+            headers={
+                "Authorization": f"Bearer {SENDGRID_API_KEY}",
+                "Content-Type": "application/json"
+            },
+            json={
+                "personalizations": [
+                    {"to": [{"email": to_email}]}
+                ],
+                "from": {"email": SENDGRID_FROM_EMAIL},
+                "subject": "Your Internship Logbook Activation Code",
+                "content": [
+                    {
+                        "type": "text/plain",
+                        "value": (
+                            f"Your activation code is: {otp_code}\n\n"
+                            "Use this code to set your password and "
+                            "activate your account."
+                        )
+                    }
+                ]
+            },
+            timeout=10
+        )
+
+        if response.status_code >= 400:
+            return False, response.text
+
+        return True, None
+
+    except Exception as e:
+        return False, str(e)
